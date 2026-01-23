@@ -1,61 +1,74 @@
 {
-    "name": "test",
+    "name": "hems service workshop",
     "esdl_type" : "EConnection",
-    "description" : "this is a test description",
+    "description" : "The hems model you will on during the workshop",
     "relevant_links" : [
         {
-            "name" : "test link",
-            "url" : "https://example.com/test",
-            "description" : "this is a test link"
-        },
-        {
-            "name" : "another test link",
-            "url" : "https://example.com/anothertest",
-            "description" : "this is another link"
+            "name" : "EConnection ESDL documentation",
+            "url" : "https://energytransition.github.io/#router/doc-content/687474703a2f2f7777772e746e6f2e6e6c2f6573646c/EConnection.html",
+            "description" : "Details on the EConnection ESDL type"
         }
     ],
     "calculations" : [
         {
-            "name": "test calculation",
-            "description" : "test",
+            "name": "optimize consumption",
+            "description" : "function to optimize consumption",
             "time_period_in_seconds" : 900,
             "offset_in_seconds" : 0,
             "inputs" : [
                 {
-                    "name" : "input1",
-                    "esdl_type" : "PVInstallation",
+                    "name" : "current_active_power",
+                    "esdl_type" : "ElectricityDemand",
                     "data_type" : "DOUBLE",
-                    "description" : "input 1 description",
-                    "unit" : "K"
-                }
-            ],
-            "outputs" : [
-                {
-                    "name" : "output1",
-                    "data_type" : "DOUBLE",
-                    "description" : "output 1 description",
+                    "description" : "The current active power demand",
                     "unit" : "W"
                 },
                 {
-                    "name" : "output2",
+                    "name" : "current_reactive_power",
+                    "esdl_type" : "ElectricityDemand",
                     "data_type" : "DOUBLE",
-                    "description" : "output 2 description",
+                    "description" : "The current reactive power demand",
+                    "unit" : "W"
+                },
+                {
+                    "name" : "pv_active_power",
+                    "esdl_type" : "PVInstallation",
+                    "data_type" : "DOUBLE",
+                    "description" : "The current active power production from the PV",
+                    "unit" : "W"
+                },
+                {
+                    "name" : "max_charge_active_power",
+                    "esdl_type" : "Battery",
+                    "data_type" : "DOUBLE",
+                    "description" : "The current amount of active power the battery can maximal charge",
+                    "unit" : "W"
+                },
+                {
+                    "name" : "max_discharge_active_power",
+                    "esdl_type" : "Battery",
+                    "data_type" : "DOUBLE",
+                    "description" : "The current amount of active power the battery can maximal discharge",
                     "unit" : "W"
                 }
-            ]
-        },
-        {
-            "name": "test calculation 2",
-            "description" : "test",
-            "time_period_in_seconds" : 900,
-            "offset_in_seconds" : 100,
-            "inputs" : [
             ],
             "outputs" : [
                 {
-                    "name" : "output3",
+                    "name" : "aggregated_active_power",
                     "data_type" : "DOUBLE",
-                    "description" : "output 3 description",
+                    "description" : "The total active power dispatch of the house accross the 3 phases",
+                    "unit" : "W"
+                },
+                {
+                    "name" : "aggregated_reactive_power",
+                    "data_type" : "DOUBLE",
+                    "description" : "The total reactive power dispatch of the house accross the 3 phases",
+                    "unit" : "VAr"
+                },
+                {
+                    "name" : "active_power_to_charge",
+                    "data_type" : "DOUBLE",
+                    "description" : "The total ",
                     "unit" : "W"
                 }
             ]
