@@ -7,6 +7,5 @@ COPY src/HemsServiceWorkshop ./src/HemsServiceWorkshop
 COPY pyproject.toml ./
 COPY README.md ./
 
-RUN pip install -r requirements.txt && \
-    pip install ./
+RUN pip install ./
 ENTRYPOINT ["python3", "src/HemsServiceWorkshop/hems_service_workshop.py"]
