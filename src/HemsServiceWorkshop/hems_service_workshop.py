@@ -37,4 +37,4 @@ if __name__ == "__main__":
 
     helics_simulation_executor = HemsServiceWorkshop()
     helics_simulation_executor.start_simulation()
-    helics_simulation_executor.stop_simulation()
+    # helics_simulation_executor.stop_simulation()
