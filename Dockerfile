@@ -3,9 +3,9 @@ FROM python:3.13
 RUN mkdir /app/
 WORKDIR /app
 
-COPY src/HemsServiceWorkshop src/HemsServiceWorkshop
-COPY pyproject.toml ./
-COPY README.md ./
+COPY app/src/HemsServiceWorkshop app/src/HemsServiceWorkshop
+COPY pyproject.toml app/
+COPY README.md app/
 RUN pip install ./
 
-ENTRYPOINT python3 src/HemsServiceWorkshop/hemsserviceworkshop.py
+ENTRYPOINT python3 app/src/HemsServiceWorkshop/hemsserviceworkshop.py
