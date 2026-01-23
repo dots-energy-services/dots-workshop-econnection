@@ -1,11 +1,12 @@
-FROM python:3.13
+FROM python:3.14
 
 RUN mkdir /app/
 WORKDIR /app
 
-COPY app/src/HemsServiceWorkshop app/src/HemsServiceWorkshop
-COPY pyproject.toml app/
-COPY README.md app/
-RUN pip install ./
+COPY src/HemsServiceWorkshop ./src/HemsServiceWorkshop
+COPY pyproject.toml ./
+COPY README.md ./
 
-ENTRYPOINT python3 app/src/HemsServiceWorkshop/hemsserviceworkshop.py
+RUN pip install -r requirements.txt && \
+    pip install ./
+ENTRYPOINT ["python3", "src/HemsServiceWorkshop/hems_service_workshop.py"]
