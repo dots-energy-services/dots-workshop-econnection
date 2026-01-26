@@ -28,7 +28,7 @@
                     "esdl_type" : "ElectricityDemand",
                     "data_type" : "DOUBLE",
                     "description" : "The current reactive power demand",
-                    "unit" : "W"
+                    "unit" : "VAr"
                 },
                 {
                     "name" : "pv_active_power",
