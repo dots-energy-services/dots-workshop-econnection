@@ -17,6 +17,8 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         current_reactive_power  = get_single_param_with_name(param_dict, "current_reactive_power")
         current_active_power  = get_single_param_with_name(param_dict, "current_active_power")
         pv_active_power  = get_single_param_with_name(param_dict, "pv_active_power")
+        if pv_active_power == None:
+            pv_active_power = 0
         max_charge_active_power  = get_single_param_with_name(param_dict, "max_charge_active_power")
         max_discharge_active_power  = get_single_param_with_name(param_dict, "max_discharge_active_power")
 
