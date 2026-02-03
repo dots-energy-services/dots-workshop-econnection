@@ -18,7 +18,8 @@ classifiers = [
 ]
 dependencies = [
   'helics==3.6.1',
-  'dots_infrastructure==1.0.9'
+  'dots_infrastructure==1.0.9',
+  'numpy==2.4.2',
 ]
 
 [project.urls]
