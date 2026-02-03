@@ -39,6 +39,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
 
 
 
+
         return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
 
 
