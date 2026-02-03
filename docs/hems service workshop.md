@@ -13,7 +13,7 @@ function to optimize consumption
 |Name            |esdl_type            |data_type            |unit            |description            |
 |----------------|---------------------|---------------------|----------------|-----------------------|
 |current_active_power|ElectricityDemand|DOUBLE|W|The current active power demand|
-|current_reactive_power|ElectricityDemand|DOUBLE|W|The current reactive power demand|
+|current_reactive_power|ElectricityDemand|DOUBLE|VAr|The current reactive power demand|
 |pv_active_power|PVInstallation|DOUBLE|W|The current active power production from the PV|
 |max_charge_active_power|Battery|DOUBLE|W|The current amount of active power the battery can maximal charge|
 |max_discharge_active_power|Battery|DOUBLE|W|The current amount of active power the battery can maximal discharge|
