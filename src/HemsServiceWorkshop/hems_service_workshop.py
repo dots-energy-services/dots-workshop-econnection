@@ -37,6 +37,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         aggregated_reactive_power_1phase = current_reactive_power / 3
         aggregated_reactive_power = [aggregated_reactive_power_1phase, aggregated_reactive_power_1phase, aggregated_reactive_power_1phase]
 
+
         return OptimizeConsumptionOutput(
             aggregated_active_power=aggregated_active_power,
             aggregated_reactive_power=aggregated_reactive_power,
