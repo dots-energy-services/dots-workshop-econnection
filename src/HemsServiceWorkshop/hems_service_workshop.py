@@ -28,8 +28,9 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         aggregated_active_power = [aggregated_active_power_1phase, aggregated_active_power_1phase, aggregated_active_power_1phase]
         aggregated_reactive_power = [aggregated_reactive_power_1phase, aggregated_reactive_power_1phase, aggregated_reactive_power_1phase]
         active_power_to_charge = 0
+        
         # If there is a deficit in power, discharge the battery to cover it
-        if 0 > pv_active_power - current_active_power > -max_discharge_active_power:
+        if 0 > pv_active_power - current_active_power > max_discharge_active_power:
             active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
         # If there is surplus PV power, use it to charge the battery
