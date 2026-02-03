@@ -38,6 +38,10 @@ class HemsServiceWorkshopBase(HelicsSimulationExecutor):
                                     input_name="max_discharge_active_power", 
                                     input_unit="W", 
                                     input_type=h.HelicsDataType.DOUBLE),
+            SubscriptionDescription(esdl_type="EnergyMarket", 
+                                    input_name="day_ahead_price", 
+                                    input_unit="EURO/KWh",  
+                                    input_type=h.HelicsDataType.DOUBLE),
         ]
         optimize_consumption_outputs = [
         

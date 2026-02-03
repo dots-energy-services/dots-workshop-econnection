@@ -4,7 +4,6 @@ from dots_infrastructure.DataClasses import TimeStepInformation, EsdlId
 from dots_infrastructure.CalculationServiceHelperFunctions import get_single_param_with_name
 
 from esdl import EnergySystem
-from esdl import MarketPrices
 
 from HemsServiceWorkshop.hems_service_workshop_base import HemsServiceWorkshopBase
 from HemsServiceWorkshop.hems_service_workshop_dataclasses import OptimizeConsumptionOutput
