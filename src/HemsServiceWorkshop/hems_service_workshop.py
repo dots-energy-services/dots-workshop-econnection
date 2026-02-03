@@ -32,6 +32,8 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
 
+        aggregated_active_power = [1000, 1000, 1000]
+
         return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
 
 
