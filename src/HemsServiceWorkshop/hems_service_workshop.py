@@ -4,6 +4,7 @@ from dots_infrastructure.DataClasses import TimeStepInformation, EsdlId
 from dots_infrastructure.CalculationServiceHelperFunctions import get_single_param_with_name
 
 from esdl import EnergySystem
+from esdl import MarketPrices
 
 from HemsServiceWorkshop.hems_service_workshop_base import HemsServiceWorkshopBase
 from HemsServiceWorkshop.hems_service_workshop_dataclasses import OptimizeConsumptionOutput
@@ -28,6 +29,11 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         aggregated_active_power = [aggregated_active_power_1phase, aggregated_active_power_1phase, aggregated_active_power_1phase]
         aggregated_reactive_power = [aggregated_reactive_power_1phase, aggregated_reactive_power_1phase, aggregated_reactive_power_1phase]
         active_power_to_charge = 0
+        # If there is a deficit in power, discharge the battery to cover it
+        if 0 > pv_active_power - current_active_power > -max_discharge_active_power
+            active_power_to_charge = pv_active_power - current_active_power
+            aggregated_active_power = [0,0,0]
+        # If there is surplus PV power, use it to charge the battery
         if 0 < pv_active_power - current_active_power < max_charge_active_power:
             active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
