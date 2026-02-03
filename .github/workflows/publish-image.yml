@@ -10,7 +10,7 @@ on:
       - v*
   pull_request:
 env:
-  IMAGE_NAME: hemsworkshop
+  IMAGE_NAME: my-hems-service
 jobs:
   push:
     runs-on: ubuntu-latest
