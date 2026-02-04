@@ -29,9 +29,12 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         residual_demand = current_active_power - pv_active_power # >0 = discharge, <0 = charge
         active_power_to_charge = np.clip(-residual_demand, min=max_discharge_active_power, max=max_charge_active_power)
 
-        current_active_power = current_active_power + active_power_to_charge
+        # 380
+        # -380 --> not possible => empty => 0
 
-        aggregated_active_power_1phase = current_active_power / 3
+        net_active_power = current_active_power + active_power_to_charge - pv_active_power
+
+        aggregated_active_power_1phase = net_active_power / 3
         aggregated_active_power = [aggregated_active_power_1phase, aggregated_active_power_1phase, aggregated_active_power_1phase]
 
         aggregated_reactive_power_1phase = current_reactive_power / 3
