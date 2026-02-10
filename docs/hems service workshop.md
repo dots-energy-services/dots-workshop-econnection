@@ -13,15 +13,16 @@ function to optimize consumption
 |Name            |esdl_type            |data_type            |unit            |description            |
 |----------------|---------------------|---------------------|----------------|-----------------------|
 |current_active_power|ElectricityDemand|DOUBLE|W|The current active power demand|
-|current_reactive_power|ElectricityDemand|DOUBLE|W|The current reactive power demand|
+|current_reactive_power|ElectricityDemand|DOUBLE|VAr|The current reactive power demand|
 |pv_active_power|PVInstallation|DOUBLE|W|The current active power production from the PV|
 |max_charge_active_power|Battery|DOUBLE|W|The current amount of active power the battery can maximal charge|
 |max_discharge_active_power|Battery|DOUBLE|W|The current amount of active power the battery can maximal discharge|
+|day_ahead_price|EnergyMarket|DOUBLE|EURO/KWh|The day ahead electricity prices for the coming 15 minutes in euros per MWh|
 #### Output values
 |Name             |data_type             |unit             |description             |
 |-----------------|----------------------|-----------------|------------------------|
-|aggregated_active_power|DOUBLE|W|The total active power dispatch of the house accross the 3 phases|
-|aggregated_reactive_power|DOUBLE|VAr|The total reactive power dispatch of the house accross the 3 phases|
+|aggregated_active_power|VECTOR|W|The total active power dispatch of the house accross the 3 phases|
+|aggregated_reactive_power|VECTOR|VAr|The total reactive power dispatch of the house accross the 3 phases|
 |active_power_to_charge|DOUBLE|W|The total |
 
 ### Relevant links
