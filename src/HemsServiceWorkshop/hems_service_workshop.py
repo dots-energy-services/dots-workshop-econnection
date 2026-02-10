@@ -35,7 +35,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             aggregated_active_power = [0,0,0]
         elif 0 < residual_generation < max_discharge_active_power:
             active_power_to_charge = residual_generation
-
+            aggregated_active_power = [0, 0, 0]
 
 
         return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
