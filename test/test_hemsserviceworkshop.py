@@ -9,7 +9,7 @@ from dots_infrastructure import CalculationServiceHelperFunctions
 from HemsServiceWorkshop.hems_service_workshop import HemsServiceWorkshop
 
 BROKER_TEST_PORT = 23404
-START_DATE_TIME = datetime(2024, 1, 1, 0, 0, 0)
+START_DATE_TIME = datetime(2020, 8, 10, 0, 0, 0)
 SIMULATION_DURATION_IN_SECONDS = 960
 TEST_ID = "5c19dcff-b004-4644-99b9-f42d15a34f3a"
 
@@ -31,13 +31,14 @@ class Test(unittest.TestCase):
             "pv_active_power": 110,
             "max_charge_active_power": 8,
             "max_discharge_active_power": -8,
+            'day_ahead_price':40
         }
 
         hems_service = HemsServiceWorkshop()
         output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
 
         self.assertListEqual(output.aggregated_active_power, [0,0,0])
-        self.assertEqual(output.active_power_to_charge, 2)
+        self.assertEqual(output.active_power_to_charge, 0)
 
     def test_when_pv_cannot_fully_cover_demand_active_power_is_evenly_divided(self):
         param_dict = {
@@ -46,6 +47,7 @@ class Test(unittest.TestCase):
             "pv_active_power": 108,
             "max_charge_active_power": 8,
             "max_discharge_active_power": -8,
+            'day_ahead_price':60
         }
 
         hems_service = HemsServiceWorkshop()

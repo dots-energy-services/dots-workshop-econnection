@@ -21,6 +21,8 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             pv_active_power = 0
         max_charge_active_power  = get_single_param_with_name(param_dict, "max_charge_active_power")
         max_discharge_active_power  = get_single_param_with_name(param_dict, "max_discharge_active_power")
+        market_price  = get_single_param_with_name(param_dict, "day_ahead_price")
+        print(f"Market price at time {simulation_time} is {market_price} EUR/MWh")
 
         active_power_to_charge = 0
         aggregated_active_power_1phase = current_active_power / 3
@@ -29,7 +31,9 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         aggregated_reactive_power = [aggregated_reactive_power_1phase, aggregated_reactive_power_1phase, aggregated_reactive_power_1phase]
         active_power_to_charge = 0
         if 0 < pv_active_power - current_active_power < max_charge_active_power:
-            active_power_to_charge = pv_active_power - current_active_power
+            # active_power_to_charge = pv_active_power - current_active_power
+            if market_price < 0.05:  # if the market price is low, charge the battery
+                active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
 
         return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
