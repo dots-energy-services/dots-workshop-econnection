@@ -37,16 +37,16 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             active_power_to_charge = max_discharge_active_power
             # Discharge battery and feed everything (PV + battery) back to grid
             # Negative value means feeding back to grid
-            total_power_to_sell = pv_active_power - max_discharge_active_power - current_active_power
+            total_power_to_sell = pv_active_power + max_discharge_active_power - current_active_power
             power_per_phase = total_power_to_sell / 3
             aggregated_active_power = [power_per_phase, power_per_phase, power_per_phase]
         # If there is a deficit in power, discharge the battery to cover it
         elif 0 > pv_active_power - current_active_power > max_discharge_active_power:
-            active_power_to_charge = pv_active_power - current_active_power
+            active_power_to_charge = pv_active_power - current_active_power 
             aggregated_active_power = [0,0,0]
         # If there is surplus PV power, use it to charge the battery
         elif 0 < pv_active_power - current_active_power < max_charge_active_power:
-            active_power_to_charge = 2 * (pv_active_power - current_active_power)
+            active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
 
         return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
