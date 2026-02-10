@@ -54,7 +54,7 @@ class HemsServiceWorkshopBase(HelicsSimulationExecutor):
                                     esdl_type="EConnection",
                                     output_name="aggregated_reactive_power",
                                     output_unit="VAr", 
-                                    data_type=h.HelicsDataType.DOUBLE),
+                                    data_type=h.HelicsDataType.VECTOR),
             PublicationDescription(global_flag=True, 
                                     esdl_type="EConnection",
                                     output_name="active_power_to_charge",
