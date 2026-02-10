@@ -24,7 +24,7 @@ class HemsServiceWorkshopBase(HelicsSimulationExecutor):
                                     input_type=h.HelicsDataType.DOUBLE),
             SubscriptionDescription(esdl_type="ElectricityDemand", 
                                     input_name="current_reactive_power", 
-                                    input_unit="W", 
+                                    input_unit="VAr", 
                                     input_type=h.HelicsDataType.DOUBLE),
             SubscriptionDescription(esdl_type="PVInstallation", 
                                     input_name="pv_active_power", 
@@ -37,6 +37,10 @@ class HemsServiceWorkshopBase(HelicsSimulationExecutor):
             SubscriptionDescription(esdl_type="Battery", 
                                     input_name="max_discharge_active_power", 
                                     input_unit="W", 
+                                    input_type=h.HelicsDataType.DOUBLE),
+            SubscriptionDescription(esdl_type="EnergyMarket", 
+                                    input_name="day_ahead_price", 
+                                    input_unit="EURO/KWh", 
                                     input_type=h.HelicsDataType.DOUBLE),
         ]
         optimize_consumption_outputs = [

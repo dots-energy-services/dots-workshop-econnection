@@ -50,18 +50,25 @@
                     "data_type" : "DOUBLE",
                     "description" : "The current amount of active power the battery can maximal discharge",
                     "unit" : "W"
+                },
+                {
+                    "name" : "day_ahead_price",
+                    "esdl_type" : "EnergyMarket",
+                    "data_type" : "DOUBLE",
+                    "description" : "The day ahead electricity prices for the coming 15 minutes in euros per MWh",
+                    "unit" : "EURO/KWh"
                 }
             ],
             "outputs" : [
                 {
                     "name" : "aggregated_active_power",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total active power dispatch of the house accross the 3 phases",
                     "unit" : "W"
                 },
                 {
                     "name" : "aggregated_reactive_power",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total reactive power dispatch of the house accross the 3 phases",
                     "unit" : "VAr"
                 },
