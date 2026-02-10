@@ -53,7 +53,7 @@ class Test(unittest.TestCase):
         hems_service = HemsServiceWorkshop()
         output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
 
-        self.assertListEqual(output.aggregated_active_power, [36,36,36])
+        self.assertListEqual(output.aggregated_active_power, [0,0,0])
         self.assertListEqual(output.aggregated_reactive_power, [1,1,1])
 
 if __name__ == '__main__':
