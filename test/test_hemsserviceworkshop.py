@@ -21,7 +21,11 @@ class Test(unittest.TestCase):
     def setUp(self):
         CalculationServiceHelperFunctions.get_simulator_configuration_from_environment = simulator_environment_e_connection
         esh = EnergySystemHandler()
-        esh.load_file("test/test.esdl")
+        # Use path relative to test file location for CI compatibility
+        import os
+        test_dir = os.path.dirname(os.path.abspath(__file__))
+        esdl_path = os.path.join(test_dir, "test.esdl")
+        esh.load_file(esdl_path)
         self.energy_system = esh.get_energy_system()
 
     def test_when_pv_can_fully_cover_demand_active_power_is_zero_and_battery_is_charged(self):
