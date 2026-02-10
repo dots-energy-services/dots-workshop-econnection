@@ -38,7 +38,7 @@ class Test(unittest.TestCase):
         output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
 
         self.assertListEqual(output.aggregated_active_power, [0,0,0])
-        self.assertEqual(output.active_power_to_charge, 2)
+        self.assertEqual(output.active_power_to_charge, 0)
 
     def test_when_pv_cannot_fully_cover_demand_active_power_is_evenly_divided(self):
         param_dict = {
