@@ -46,6 +46,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
 
         residual_demand = current_active_power - pv_active_power # >0 = discharge, <0 = charge
 
+        day_ahead_price = None
         if day_ahead_price is None:
             # self consumption only
             active_power_to_charge = np.clip(-residual_demand, min=max_discharge_active_power, max=max_charge_active_power)
