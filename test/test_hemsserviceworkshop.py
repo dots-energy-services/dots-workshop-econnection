@@ -73,7 +73,7 @@ class Test(unittest.TestCase):
             "pv_active_power": 110,
             "max_charge_active_power": 8,
             "max_discharge_active_power": -8,
-            "market_price": 0.15,  # High price (> 0.01 threshold)
+            "market_price": 0.15,  # High price (> 0.08 threshold)
         }
 
         hems_service = HemsServiceWorkshop()
@@ -93,7 +93,7 @@ class Test(unittest.TestCase):
             "pv_active_power": 110,
             "max_charge_active_power": 8,
             "max_discharge_active_power": -8,
-            "market_price": 0.02,  # Moderate but above threshold (> 0.01)
+            "market_price": 0.09,  # Above 0.08 threshold
         }
 
         hems_service = HemsServiceWorkshop()
@@ -102,7 +102,7 @@ class Test(unittest.TestCase):
         print(f"\n--- Test 3b: Moderate market price (realistic) ---")
         print(f"Input: PV={param_dict['pv_active_power']}W, Demand={param_dict['current_active_power']}W, Market Price={param_dict['market_price']} EUR/kWh")
         print(f"Output: aggregated_active_power={output.aggregated_active_power}, active_power_to_charge={output.active_power_to_charge}W")
-        print(f"Result: Battery discharges even at moderate prices above 0.01 EUR/kWh threshold")
+        print(f"Result: Battery discharges at prices above 0.08 EUR/kWh threshold")
         
         self.assertEqual(output.active_power_to_charge, -8)
 
@@ -159,7 +159,7 @@ class Test(unittest.TestCase):
         print(f"\n--- Test 5: Market price input verification ---")
         print(f"Without market_price: active_power_to_charge={output1.active_power_to_charge}W (normal behavior)")
         print(f"With market_price=0.2: active_power_to_charge={output2.active_power_to_charge}W (should discharge)")
-        print(f"Market price input retrieval: {'✓ WORKING' if output2.active_power_to_charge == -8 else '✗ NOT WORKING'}")
+        print(f"Market price input retrieval: {'WORKING' if output2.active_power_to_charge == -8 else 'NOT WORKING'}")
         
         # Without price, no charging/discharging needed (PV matches demand)
         self.assertEqual(output1.active_power_to_charge, 0)

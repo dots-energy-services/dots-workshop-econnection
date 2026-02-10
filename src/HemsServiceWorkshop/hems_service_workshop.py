@@ -41,7 +41,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         
         # Discharge threshold: adjust this based on your market price range
         # For testing: 0.1 EUR/kWh, for real data: might need to be lower (e.g., 0.05 or percentile-based)
-        discharge_price_threshold = 0.08  # Lowered threshold for realistic market prices
+        discharge_price_threshold = 0.08  # Threshold for triggering battery discharge to sell
         
         # If market price is above threshold, maximize discharge and sell to grid
         if market_price > discharge_price_threshold:
