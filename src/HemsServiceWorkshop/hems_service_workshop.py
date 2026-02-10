@@ -21,6 +21,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             pv_active_power = 0
         max_charge_active_power  = get_single_param_with_name(param_dict, "max_charge_active_power")
         max_discharge_active_power  = get_single_param_with_name(param_dict, "max_discharge_active_power")
+        day_ahead_price = get_single_param_with_name(param_dict, "day_ahead_price")
 
         active_power_to_charge = 0
         aggregated_active_power_1phase = current_active_power / 3
@@ -28,9 +29,15 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         aggregated_active_power = [aggregated_active_power_1phase, aggregated_active_power_1phase, aggregated_active_power_1phase]
         aggregated_reactive_power = [aggregated_reactive_power_1phase, aggregated_reactive_power_1phase, aggregated_reactive_power_1phase]
         active_power_to_charge = 0
+
         if 0 < pv_active_power - current_active_power < max_charge_active_power:
             active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
+
+        if day_ahead_price > 0.8:
+            active_power_to_charge = - current_active_power
+            aggregated_active_power = [0,0,0]
+
 
         return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
 
