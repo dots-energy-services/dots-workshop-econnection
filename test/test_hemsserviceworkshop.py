@@ -73,7 +73,7 @@ class Test(unittest.TestCase):
             "pv_active_power": 110,
             "max_charge_active_power": 8,
             "max_discharge_active_power": -8,
-            "market_price": 0.15,  # High price (> 0.1)
+            "market_price": 0.15,  # High price (> 0.01 threshold)
         }
 
         hems_service = HemsServiceWorkshop()
@@ -83,6 +83,26 @@ class Test(unittest.TestCase):
         print(f"Input: PV={param_dict['pv_active_power']}W, Demand={param_dict['current_active_power']}W, Market Price={param_dict['market_price']} EUR/kWh")
         print(f"Output: aggregated_active_power={output.aggregated_active_power}, active_power_to_charge={output.active_power_to_charge}W")
         print(f"Result: Battery discharges at max rate to sell power to grid during high prices")
+        
+        self.assertEqual(output.active_power_to_charge, -8)
+
+    def test_when_market_price_is_moderate_battery_discharges_to_sell(self):
+        param_dict = {
+            "current_reactive_power": 0,
+            "current_active_power": 108.0,
+            "pv_active_power": 110,
+            "max_charge_active_power": 8,
+            "max_discharge_active_power": -8,
+            "market_price": 0.02,  # Moderate but above threshold (> 0.01)
+        }
+
+        hems_service = HemsServiceWorkshop()
+        output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
+
+        print(f"\n--- Test 3b: Moderate market price (realistic) ---")
+        print(f"Input: PV={param_dict['pv_active_power']}W, Demand={param_dict['current_active_power']}W, Market Price={param_dict['market_price']} EUR/kWh")
+        print(f"Output: aggregated_active_power={output.aggregated_active_power}, active_power_to_charge={output.active_power_to_charge}W")
+        print(f"Result: Battery discharges even at moderate prices above 0.01 EUR/kWh threshold")
         
         self.assertEqual(output.active_power_to_charge, -8)
 
@@ -107,6 +127,45 @@ class Test(unittest.TestCase):
         self.assertEqual(output.active_power_to_charge, 10)
         # 10W excess should be fed back to grid (negative values)
         self.assertAlmostEqual(output.aggregated_active_power[0], -10/3, places=2)
+
+    def test_market_price_input_is_retrieved_correctly(self):
+        # Test with no market_price parameter (should default to 0)
+        param_dict_no_price = {
+            "current_reactive_power": 0,
+            "current_active_power": 100.0,
+            "pv_active_power": 100,
+            "max_charge_active_power": 10,
+            "max_discharge_active_power": -8,
+        }
+
+        # Test with market_price parameter
+        param_dict_with_price = {
+            "current_reactive_power": 0,
+            "current_active_power": 100.0,
+            "pv_active_power": 100,
+            "max_charge_active_power": 10,
+            "max_discharge_active_power": -8,
+            "market_price": 0.2,  # Above threshold
+        }
+
+        hems_service = HemsServiceWorkshop()
+        
+        # Without market price (should behave normally)
+        output1 = hems_service.optimize_consumption(param_dict_no_price, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
+        
+        # With high market price (should discharge)
+        output2 = hems_service.optimize_consumption(param_dict_with_price, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
+
+        print(f"\n--- Test 5: Market price input verification ---")
+        print(f"Without market_price: active_power_to_charge={output1.active_power_to_charge}W (normal behavior)")
+        print(f"With market_price=0.2: active_power_to_charge={output2.active_power_to_charge}W (should discharge)")
+        print(f"Market price input retrieval: {'✓ WORKING' if output2.active_power_to_charge == -8 else '✗ NOT WORKING'}")
+        
+        # Without price, no charging/discharging needed (PV matches demand)
+        self.assertEqual(output1.active_power_to_charge, 0)
+        
+        # With high price, should discharge at max rate
+        self.assertEqual(output2.active_power_to_charge, -8)
 
 if __name__ == '__main__':
     unittest.main()
