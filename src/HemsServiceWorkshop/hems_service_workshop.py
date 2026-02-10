@@ -32,10 +32,14 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         aggregated_reactive_power = [aggregated_reactive_power_1phase, aggregated_reactive_power_1phase, aggregated_reactive_power_1phase]
         active_power_to_charge = 0
         
-        # If market price is above 0.1, maximize discharge
+        # If market price is above 0.1, maximize discharge and sell to grid
         if market_price > 0.1:
             active_power_to_charge = max_discharge_active_power
-            aggregated_active_power = [0,0,0]
+            # Discharge battery and feed everything (PV + battery) back to grid
+            # Negative value means feeding back to grid
+            total_power_to_sell = pv_active_power - max_discharge_active_power - current_active_power
+            power_per_phase = total_power_to_sell / 3
+            aggregated_active_power = [power_per_phase, power_per_phase, power_per_phase]
         # If there is a deficit in power, discharge the battery to cover it
         elif 0 > pv_active_power - current_active_power > max_discharge_active_power:
             active_power_to_charge = pv_active_power - current_active_power
