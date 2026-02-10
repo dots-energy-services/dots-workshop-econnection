@@ -34,7 +34,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
 
-        if day_ahead_price > 0.8:
+        if day_ahead_price > 0.1:
             active_power_to_charge = - current_active_power
             aggregated_active_power = [0,0,0]
 
