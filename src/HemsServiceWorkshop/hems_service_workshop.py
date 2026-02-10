@@ -32,7 +32,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         active_power_to_charge = 0
         if 0 < pv_active_power - current_active_power < max_charge_active_power:
             # active_power_to_charge = pv_active_power - current_active_power
-            if market_price < 50:  # if the market price is low, charge the battery
+            if market_price < 0.05:  # if the market price is low, charge the battery
                 active_power_to_charge = pv_active_power - current_active_power
             aggregated_active_power = [0,0,0]
 
