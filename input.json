@@ -50,6 +50,13 @@
                     "data_type" : "DOUBLE",
                     "description" : "The current amount of active power the battery can maximal discharge",
                     "unit" : "W"
+                },
+               {
+                    "name" : "day_ahead_price",
+                    "esdl_type" : "EnergyMarket",
+                    "data_type" : "DOUBLE",
+                    "description" : "The day ahead electricity prices for the coming 15 minutes in euros per MWh",
+                    "unit" : "EURO/KWh"
                 }
             ],
             "outputs" : [

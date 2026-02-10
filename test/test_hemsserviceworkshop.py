@@ -114,5 +114,73 @@ class Test(unittest.TestCase):
         self.assertListEqual(output.aggregated_active_power, [1, 1, 1])
         self.assertEqual(output.active_power_to_charge, -8)  # discharging at max
 
+
+    ################
+    # ENERGY PRICE #
+    ################
+    def test_charge_when_price_is_low(self):
+        param_dict = {
+            "current_reactive_power": 0,
+            "current_active_power": 107.0,
+            "pv_active_power": 110,
+            "max_charge_active_power": 8,
+            "max_discharge_active_power": -8,
+            "day_ahead_price": 0.01, # lower than 0.05 limit, cheap electricity = dont deliver to grid
+        }
+
+        hems_service = HemsServiceWorkshop()
+        output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1, 24), TEST_ID, self.energy_system)
+
+        self.assertListEqual(output.aggregated_active_power, [0, 0, 0])
+        self.assertEqual(output.active_power_to_charge, 3)
+
+    def test_dont_charge_when_price_is_high(self):
+        param_dict = {
+            "current_reactive_power": 0,
+            "current_active_power": 107.0,
+            "pv_active_power": 110,
+            "max_charge_active_power": 8,
+            "max_discharge_active_power": -8,
+            "day_ahead_price": 0.1, # higher than 0.05 limit, expensive electricity = deliver to grid
+        }
+
+        hems_service = HemsServiceWorkshop()
+        output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1, 24), TEST_ID, self.energy_system)
+
+        self.assertListEqual(output.aggregated_active_power, [-1, -1, -1])
+        self.assertEqual(output.active_power_to_charge, 0)
+
+    def test_discharge_when_price_is_low(self):
+        param_dict = {
+            "current_reactive_power": 0,
+            "current_active_power": 110.0,
+            "pv_active_power": 107,
+            "max_charge_active_power": 8,
+            "max_discharge_active_power": -8,
+            "day_ahead_price": 0.01, # lower than 0.05 limit, cheap electricity = use from grid
+        }
+
+        hems_service = HemsServiceWorkshop()
+        output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1, 24), TEST_ID, self.energy_system)
+
+        self.assertListEqual(output.aggregated_active_power, [1, 1, 1])
+        self.assertEqual(output.active_power_to_charge, 0)
+
+    def test_dont_charge_when_price_is_high(self):
+        param_dict = {
+            "current_reactive_power": 0,
+            "current_active_power": 110.0,
+            "pv_active_power": 107,
+            "max_charge_active_power": 8,
+            "max_discharge_active_power": -8,
+            "day_ahead_price": 0.1, # higher than 0.05 limit, expensive electricity = dont use from grid
+        }
+
+        hems_service = HemsServiceWorkshop()
+        output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1, 24), TEST_ID, self.energy_system)
+
+        self.assertListEqual(output.aggregated_active_power, [0, 0, 0])
+        self.assertEqual(output.active_power_to_charge, -3)
+
 if __name__ == '__main__':
     unittest.main()
