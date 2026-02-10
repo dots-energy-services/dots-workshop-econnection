@@ -23,7 +23,7 @@ function to optimize consumption
 |-----------------|----------------------|-----------------|------------------------|
 |aggregated_active_power|VECTOR|W|The total active power dispatch of the house accross the 3 phases|
 |aggregated_reactive_power|VECTOR|VAr|The total reactive power dispatch of the house accross the 3 phases|
-|active_power_to_charge|VECTOR|W|The total |
+|active_power_to_charge|DOUBLE|W|The total |
 
 ### Relevant links
 |Link             |description             |

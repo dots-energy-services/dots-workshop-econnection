@@ -5,5 +5,5 @@ from typing import List
 class OptimizeConsumptionOutput:
     aggregated_active_power : List | None = None
     aggregated_reactive_power : List | None = None
-    active_power_to_charge : List | None = None
+    active_power_to_charge : float | None = None
 

@@ -59,7 +59,7 @@ class HemsServiceWorkshopBase(HelicsSimulationExecutor):
                                     esdl_type="EConnection",
                                     output_name="active_power_to_charge",
                                     output_unit="W", 
-                                    data_type=h.HelicsDataType.VECTOR),
+                                    data_type=h.HelicsDataType.DOUBLE),
         ]
         optimize_consumption_information = HelicsCalculationInformation(
             time_period_in_seconds=900,
