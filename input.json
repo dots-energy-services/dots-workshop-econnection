@@ -50,6 +50,13 @@
                     "data_type" : "DOUBLE",
                     "description" : "The current amount of active power the battery can maximal discharge",
                     "unit" : "W"
+                },
+                {
+                    "name" : "market_price",
+                    "esdl_type" : "EConnection",
+                    "data_type" : "DOUBLE",
+                    "description" : "The current market price for electricity",
+                    "unit" : "EUR/kWh"
                 }
             ],
             "outputs" : [
