@@ -55,8 +55,8 @@
                     "name" : "day_ahead_price",
                     "esdl_type" : "EnergyMarket",
                     "data_type" : "DOUBLE",
-                    "description" : "The current market price",
-                    "unit" : "EUR/MWh"
+                    "description" : "The day ahead electricity prices for the coming 15 minutes in euros per MWh",
+                    "unit" : "EURO/KWh"
                 }
             ],
             "outputs" : [

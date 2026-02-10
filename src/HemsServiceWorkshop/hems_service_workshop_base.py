@@ -39,8 +39,8 @@ class HemsServiceWorkshopBase(HelicsSimulationExecutor):
                                     input_unit="W", 
                                     input_type=h.HelicsDataType.DOUBLE),
             SubscriptionDescription(esdl_type="EnergyMarket", 
-                                    input_name="marketPrice", 
-                                    input_unit="EUR/MWh", 
+                                    input_name="day_ahead_price", 
+                                    input_unit="EURO/KWh", 
                                     input_type=h.HelicsDataType.DOUBLE),
         ]
         optimize_consumption_outputs = [
