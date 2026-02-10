@@ -9,7 +9,7 @@ from dots_infrastructure import CalculationServiceHelperFunctions
 from HemsServiceWorkshop.hems_service_workshop import HemsServiceWorkshop
 
 BROKER_TEST_PORT = 23404
-START_DATE_TIME = datetime(2024, 1, 1, 0, 0, 0)
+START_DATE_TIME = datetime(2020, 8, 10, 0, 0, 0)
 SIMULATION_DURATION_IN_SECONDS = 960
 TEST_ID = "5c19dcff-b004-4644-99b9-f42d15a34f3a"
 
