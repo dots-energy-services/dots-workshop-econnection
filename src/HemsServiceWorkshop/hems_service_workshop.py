@@ -31,9 +31,10 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
 
         residual_generation = pv_active_power - current_active_power
         if 0 < residual_generation < max_charge_active_power:
-            active_power_to_charge = pv_active_power - current_active_power
+            active_power_to_charge = residual_generation
             aggregated_active_power = [0,0,0]
-
+        elif - max_charge_active_power <  residual_generation < 0:
+            active_power_to_charge = residual_generation
 
 
 
