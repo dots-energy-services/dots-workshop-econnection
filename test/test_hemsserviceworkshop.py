@@ -82,5 +82,27 @@ class Test(unittest.TestCase):
         
         self.assertEqual(output.active_power_to_charge, -8)
 
+    def test_when_excess_solar_exceeds_battery_capacity_feed_back_to_grid(self):
+        param_dict = {
+            "current_reactive_power": 0,
+            "current_active_power": 100.0,
+            "pv_active_power": 120,  # 20W surplus
+            "max_charge_active_power": 10,  # Can only charge 10W
+            "max_discharge_active_power": -8,
+        }
+
+        hems_service = HemsServiceWorkshop()
+        output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
+
+        print(f"\n--- Test 4: Excess solar exceeds battery capacity ---")
+        print(f"Input: PV={param_dict['pv_active_power']}W, Demand={param_dict['current_active_power']}W, Max Charge={param_dict['max_charge_active_power']}W")
+        print(f"Surplus: {param_dict['pv_active_power'] - param_dict['current_active_power']}W, Battery can only take {param_dict['max_charge_active_power']}W")
+        print(f"Output: aggregated_active_power={output.aggregated_active_power}, active_power_to_charge={output.active_power_to_charge}W")
+        print(f"Result: Battery charges at max rate, remaining {param_dict['pv_active_power'] - param_dict['current_active_power'] - param_dict['max_charge_active_power']}W fed back to grid")
+        
+        self.assertEqual(output.active_power_to_charge, 10)
+        # 10W excess should be fed back to grid (negative values)
+        self.assertAlmostEqual(output.aggregated_active_power[0], -10/3, places=2)
+
 if __name__ == '__main__':
     unittest.main()
