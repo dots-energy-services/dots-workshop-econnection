@@ -62,7 +62,7 @@
             "outputs" : [
                 {
                     "name" : "aggregated_active_power",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total active power dispatch of the house accross the 3 phases",
                     "unit" : "W"
                 },

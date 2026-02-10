@@ -49,7 +49,7 @@ class HemsServiceWorkshopBase(HelicsSimulationExecutor):
                                     esdl_type="EConnection",
                                     output_name="aggregated_active_power",
                                     output_unit="W", 
-                                    data_type=h.HelicsDataType.DOUBLE),
+                                    data_type=h.HelicsDataType.VECTOR),
             PublicationDescription(global_flag=True, 
                                     esdl_type="EConnection",
                                     output_name="aggregated_reactive_power",
