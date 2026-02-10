@@ -31,7 +31,7 @@ class Test(unittest.TestCase):
             "pv_active_power": 110,
             "max_charge_active_power": 8,
             "max_discharge_active_power": -8,
-            "day_ahead_price":1,
+            "day_ahead_price":0,
         }
 
         hems_service = HemsServiceWorkshop()
