@@ -13,7 +13,7 @@
         {
             "name": "optimize consumption",
             "description" : "function to optimize consumption",
-            "time_period_in_seconds" : 3600,
+            "time_period_in_seconds" : 900,
             "offset_in_seconds" : 0,
             "inputs" : [
                 {
