@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
     def setUp(self):
         CalculationServiceHelperFunctions.get_simulator_configuration_from_environment = simulator_environment_e_connection
         esh = EnergySystemHandler()
-        esh.load_file("test.esdl")
+        esh.load_file("test/test.esdl")
         self.energy_system = esh.get_energy_system()
 
     def test_when_pv_can_fully_cover_demand_active_power_is_zero_and_battery_is_charged(self):
@@ -36,6 +36,10 @@ class Test(unittest.TestCase):
         hems_service = HemsServiceWorkshop()
         output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
 
+        print(f"\n--- Test 1: PV covers demand ---")
+        print(f"Input: PV={param_dict['pv_active_power']}W, Demand={param_dict['current_active_power']}W")
+        print(f"Output: aggregated_active_power={output.aggregated_active_power}, active_power_to_charge={output.active_power_to_charge}W")
+        
         self.assertListEqual(output.aggregated_active_power, [0,0,0])
         self.assertEqual(output.active_power_to_charge, 2)
 
@@ -51,8 +55,32 @@ class Test(unittest.TestCase):
         hems_service = HemsServiceWorkshop()
         output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
 
+        print(f"\n--- Test 2: PV equals demand ---")
+        print(f"Input: PV={param_dict['pv_active_power']}W, Demand={param_dict['current_active_power']}W")
+        print(f"Output: aggregated_active_power={output.aggregated_active_power}, active_power_to_charge={output.active_power_to_charge}W")
+        
         self.assertListEqual(output.aggregated_active_power, [36,36,36])
         self.assertListEqual(output.aggregated_reactive_power, [1,1,1])
+
+    def test_when_market_price_is_high_battery_discharges_to_sell(self):
+        param_dict = {
+            "current_reactive_power": 0,
+            "current_active_power": 108.0,
+            "pv_active_power": 110,
+            "max_charge_active_power": 8,
+            "max_discharge_active_power": -8,
+            "market_price": 0.15,  # High price (> 0.1)
+        }
+
+        hems_service = HemsServiceWorkshop()
+        output = hems_service.optimize_consumption(param_dict, START_DATE_TIME, TimeStepInformation(1,24), TEST_ID, self.energy_system)
+
+        print(f"\n--- Test 3: High market price ---")
+        print(f"Input: PV={param_dict['pv_active_power']}W, Demand={param_dict['current_active_power']}W, Market Price={param_dict['market_price']} EUR/kWh")
+        print(f"Output: aggregated_active_power={output.aggregated_active_power}, active_power_to_charge={output.active_power_to_charge}W")
+        print(f"Result: Battery discharges at max rate to sell power to grid during high prices")
+        
+        self.assertEqual(output.active_power_to_charge, -8)
 
 if __name__ == '__main__':
     unittest.main()

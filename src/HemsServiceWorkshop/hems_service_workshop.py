@@ -46,7 +46,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             aggregated_active_power = [0,0,0]
         # If there is surplus PV power, use it to charge the battery
         elif 0 < pv_active_power - current_active_power < max_charge_active_power:
-            active_power_to_charge = pv_active_power - current_active_power
+            active_power_to_charge = 2*(pv_active_power - current_active_power)
             aggregated_active_power = [0,0,0]
 
         return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
