@@ -28,11 +28,28 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
         aggregated_active_power = [aggregated_active_power_1phase, aggregated_active_power_1phase, aggregated_active_power_1phase]
         aggregated_reactive_power = [aggregated_reactive_power_1phase, aggregated_reactive_power_1phase, aggregated_reactive_power_1phase]
         active_power_to_charge = 0
-        if 0 < pv_active_power - current_active_power < max_charge_active_power:
-            active_power_to_charge = pv_active_power - current_active_power
-            aggregated_active_power = [0,0,0]
 
-        return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
+        residual_generation = pv_active_power - current_active_power
+        if 0 < residual_generation < max_charge_active_power:
+            active_power_to_charge = residual_generation
+            aggregated_active_power = [0,0,0]
+        elif 0 < residual_generation:
+            active_power_to_charge = max_charge_active_power
+            aggregated_active_power = residual_generation - max_charge_active_power
+            aggregated_reactive_power_1phase = current_reactive_power / 3
+            aggregated_active_power = [aggregated_active_power_1phase, aggregated_active_power_1phase,aggregated_active_power_1phase]
+
+        elif max_discharge_active_power < residual_generation < 0 :
+            active_power_to_charge = residual_generation
+            aggregated_active_power = [0, 0, 0]
+        elif max_discharge_active_power > residual_generation:
+        active_power_to_charge = residual_generation
+        aggregated_active_power = -(residual_generation + max_discharge_active_power)
+        aggregated_reactive_power_1phase = current_reactive_power / 3
+        aggregated_active_power = [aggregated_active_power_1phase, aggregated_active_power_1phase,
+                                   aggregated_active_power_1phase]
+
+    return OptimizeConsumptionOutput(aggregated_active_power, aggregated_reactive_power, active_power_to_charge)
 
 
 if __name__ == "__main__":
