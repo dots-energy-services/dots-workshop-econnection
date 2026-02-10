@@ -21,7 +21,7 @@ class HemsServiceWorkshop(HemsServiceWorkshopBase):
             pv_active_power = 0
         max_charge_active_power  = get_single_param_with_name(param_dict, "max_charge_active_power")
         max_discharge_active_power  = get_single_param_with_name(param_dict, "max_discharge_active_power")
-        market_price  = get_single_param_with_name(param_dict, "marketPrice")
+        market_price  = get_single_param_with_name(param_dict, "day_ahead_price")
         print(f"Market price at time {simulation_time} is {market_price} EUR/MWh")
 
         active_power_to_charge = 0

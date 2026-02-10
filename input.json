@@ -52,7 +52,7 @@
                     "unit" : "W"
                 },
                 {
-                    "name" : "marketPrice",
+                    "name" : "day_ahead_price",
                     "esdl_type" : "EnergyMarket",
                     "data_type" : "DOUBLE",
                     "description" : "The current market price",
