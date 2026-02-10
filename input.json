@@ -62,19 +62,19 @@
             "outputs" : [
                 {
                     "name" : "aggregated_active_power",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total active power dispatch of the house accross the 3 phases",
                     "unit" : "W"
                 },
                 {
                     "name" : "aggregated_reactive_power",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total reactive power dispatch of the house accross the 3 phases",
                     "unit" : "VAr"
                 },
                 {
                     "name" : "active_power_to_charge",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total ",
                     "unit" : "W"
                 }

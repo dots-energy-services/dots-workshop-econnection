@@ -21,9 +21,9 @@ function to optimize consumption
 #### Output values
 |Name             |data_type             |unit             |description             |
 |-----------------|----------------------|-----------------|------------------------|
-|aggregated_active_power|DOUBLE|W|The total active power dispatch of the house accross the 3 phases|
-|aggregated_reactive_power|DOUBLE|VAr|The total reactive power dispatch of the house accross the 3 phases|
-|active_power_to_charge|DOUBLE|W|The total |
+|aggregated_active_power|VECTOR|W|The total active power dispatch of the house accross the 3 phases|
+|aggregated_reactive_power|VECTOR|VAr|The total reactive power dispatch of the house accross the 3 phases|
+|active_power_to_charge|VECTOR|W|The total |
 
 ### Relevant links
 |Link             |description             |
