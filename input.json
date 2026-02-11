@@ -29,27 +29,6 @@
                     "data_type" : "DOUBLE",
                     "description" : "The current reactive power demand",
                     "unit" : "VAr"
-                },
-                {
-                    "name" : "pv_active_power",
-                    "esdl_type" : "PVInstallation",
-                    "data_type" : "DOUBLE",
-                    "description" : "The current active power production from the PV",
-                    "unit" : "W"
-                },
-                {
-                    "name" : "max_charge_active_power",
-                    "esdl_type" : "Battery",
-                    "data_type" : "DOUBLE",
-                    "description" : "The current amount of active power the battery can maximal charge",
-                    "unit" : "W"
-                },
-                {
-                    "name" : "max_discharge_active_power",
-                    "esdl_type" : "Battery",
-                    "data_type" : "DOUBLE",
-                    "description" : "The current amount of active power the battery can maximal discharge",
-                    "unit" : "W"
                 }
             ],
             "outputs" : [
@@ -64,12 +43,6 @@
                     "data_type" : "DOUBLE",
                     "description" : "The total reactive power dispatch of the house accross the 3 phases",
                     "unit" : "VAr"
-                },
-                {
-                    "name" : "active_power_to_charge",
-                    "data_type" : "DOUBLE",
-                    "description" : "The total ",
-                    "unit" : "W"
                 }
             ]
         }

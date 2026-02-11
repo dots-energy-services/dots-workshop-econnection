@@ -6,19 +6,21 @@ The hems model you will on during the workshop
 
 ## Calculations
 
-### optimize consumption 
+### test this calculation 
 
-function to optimize consumption
+function that takes prices and production and doubles it
 #### Input parameters
 |Name            |esdl_type            |data_type            |unit            |description            |
 |----------------|---------------------|---------------------|----------------|-----------------------|
 |current_active_power|ElectricityDemand|DOUBLE|W|The current active power demand|
 |current_reactive_power|ElectricityDemand|DOUBLE|VAr|The current reactive power demand|
+|solar_irradiance|EnvironmentalProfiles|VECTOR|Wm2|The expected solar irradiance for the coming 12 hours as predicted by the weather service.|
 #### Output values
 |Name             |data_type             |unit             |description             |
 |-----------------|----------------------|-----------------|------------------------|
-|aggregated_active_power|DOUBLE|W|The total active power dispatch of the house accross the 3 phases|
-|aggregated_reactive_power|DOUBLE|VAr|The total reactive power dispatch of the house accross the 3 phases|
+|aggregated_active_power|VECTOR|W|The total active power dispatch of the house accross the 3 phases|
+|aggregated_reactive_power|VECTOR|VAr|The total reactive power dispatch of the house accross the 3 phases|
+|aggregated_solar_irradiance|VECTOR|Wm2|The total solar irradiance of the house accross the 3 phases|
 
 ### Relevant links
 |Link             |description             |
