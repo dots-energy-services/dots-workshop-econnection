@@ -24,3 +24,6 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/EES-TUe/Dots-calculation-service-template"
 Issues = "https://github.com/EES-TUe/Dots-calculation-service-template/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/HemsServiceWorkshop"]
