@@ -2,6 +2,7 @@ from datetime import datetime
 import helics as h
 from dots_infrastructure.DataClasses import TimeStepInformation, EsdlId, HelicsCalculationInformation, get_single_param_with_name
 from dots_infrastructure.HelicsFederateHelpers import HelicsSimulationExecutor
+from HemsServiceWorkshop.hems_service_workshop_base import HemsServiceWorkshopBase
 from esdl import EnergySystem
 
 class HemsServiceWorkshop(HemsServiceWorkshopBase): 
