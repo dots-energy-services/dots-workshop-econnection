@@ -1,5 +1,5 @@
 {
-    "name": "hems service workshop",
+    "name": "test run",
     "esdl_type" : "EConnection",
     "description" : "The hems model you will on during the workshop",
     "relevant_links" : [
@@ -11,8 +11,8 @@
     ],
     "calculations" : [
         {
-            "name": "optimize consumption",
-            "description" : "function to optimize consumption",
+            "name": "test this calculation",
+            "description" : "function that takes prices and production and doubles it",
             "time_period_in_seconds" : 900,
             "offset_in_seconds" : 0,
             "inputs" : [
@@ -31,45 +31,31 @@
                     "unit" : "VAr"
                 },
                 {
-                    "name" : "pv_active_power",
-                    "esdl_type" : "PVInstallation",
-                    "data_type" : "DOUBLE",
-                    "description" : "The current active power production from the PV",
-                    "unit" : "W"
-                },
-                {
-                    "name" : "max_charge_active_power",
-                    "esdl_type" : "Battery",
-                    "data_type" : "DOUBLE",
-                    "description" : "The current amount of active power the battery can maximal charge",
-                    "unit" : "W"
-                },
-                {
-                    "name" : "max_discharge_active_power",
-                    "esdl_type" : "Battery",
-                    "data_type" : "DOUBLE",
-                    "description" : "The current amount of active power the battery can maximal discharge",
-                    "unit" : "W"
+                    "name" : "solar_irradiance",
+                    "esdl_type" : "EnvironmentalProfiles",
+                    "data_type" : "VECTOR",
+                    "description" : "The expected solar irradiance for the coming 12 hours as predicted by the weather service.",
+                    "unit" : "Wm2"
                 }
             ],
             "outputs" : [
                 {
                     "name" : "aggregated_active_power",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total active power dispatch of the house accross the 3 phases",
                     "unit" : "W"
                 },
                 {
                     "name" : "aggregated_reactive_power",
-                    "data_type" : "DOUBLE",
+                    "data_type" : "VECTOR",
                     "description" : "The total reactive power dispatch of the house accross the 3 phases",
                     "unit" : "VAr"
                 },
                 {
-                    "name" : "active_power_to_charge",
-                    "data_type" : "DOUBLE",
-                    "description" : "The total ",
-                    "unit" : "W"
+                    "name" : "aggregated_solar_irradiance",
+                    "data_type" : "VECTOR",
+                    "description" : "The total solar irradiance of the house accross the 3 phases",
+                    "unit" : "Wm2"
                 }
             ]
         }
